@@ -45,6 +45,7 @@ class Intersection {
     this.emitter.on('done', stoplightId => {
       if (this.walkRequested) {
         this.walkRequested = false;
+        // Pass id of done stoplight through to walkSignal
         this.walkSignal.startCycle(stoplightId);
         return;
       }
@@ -58,7 +59,7 @@ class Intersection {
 
   requestWalk() {
     console.log('requesting walk...');
-    intersection.walkRequested = true;
+    this.walkRequested = true;
   }
 }
 
@@ -105,7 +106,6 @@ class WalkSignal {
     await wait(WALK_WARN_TIME);
     this.setColor(RED);
     await wait(BUFFER_TIME);
-    // Pass id of previous stoplight through to 'done' handler
     this.emitter.emit('done', id);
 
     // This isn't as nice looking but is clerer that we're just using setTimeout
