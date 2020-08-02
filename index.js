@@ -118,7 +118,11 @@ class WalkSignal {
 
   setColor(color) {
     this.display.style.color = color;
-    this.display.classList.add(color === WALK ? 'fa-walking' : 'fa-hand-paper');
+    if (color === WALK) {
+      this.display.classList.replace('fa-hand-paper', 'fa-walking');
+    } else {
+      this.display.classList.replace('fa-walking', 'fa-hand-paper');
+    }
   }
 
   async startCycle(id) {
