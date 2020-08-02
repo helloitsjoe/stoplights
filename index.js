@@ -48,6 +48,7 @@ class Intersection {
 
     this.walkRequested = false;
     this.requestWalk = this.requestWalk.bind(this);
+    this.resetWalkButton = this.resetWalkButton.bind(this);
 
     emitter.on('done', stoplightId => {
       if (this.walkRequested) {
@@ -57,6 +58,8 @@ class Intersection {
         return;
       }
 
+      this.resetWalkButton();
+
       const nextLight = stoplightId === 'mainWay' ? this.crossWay : this.mainWay;
       nextLight.startCycle();
     });
@@ -64,9 +67,16 @@ class Intersection {
     this.mainWay.startCycle();
   }
 
+  resetWalkButton() {
+    button.textContent = 'PRESS TO WALK';
+    button.disabled = false;
+  }
+
   requestWalk() {
     console.log('requesting walk...');
     this.walkRequested = true;
+    button.textContent = 'WAIT...';
+    button.disabled = true;
   }
 }
 
