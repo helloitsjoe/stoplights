@@ -7,16 +7,65 @@
     <style>
       .stoplight {
         width: 100px;
-        height: 100px;
         display: inline-block;
+        background-color: black;
+        border-radius: 8px;
+      }
+
+      .walk-sign {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        padding-top: 10px;
+        background-color: black;
+        text-align: center;
+      }
+
+      .light {
+        width: 60px;
+        height: 60px;
+        margin: 20px;
+        border-radius: 50%;
+      }
+
+      .red {
+        background-color: #400;
+      }
+
+      .yellow {
+        background-color: #430;
+      }
+
+      .green {
+        background-color: #040;
+      }
+
+      .red.on {
+        background-color: red;
+      }
+
+      .yellow.on {
+        background-color: gold;
+      }
+
+      .green.on {
+        background-color: lime;
       }
     </style>
   </head>
   <body>
     <div id="root">
-      <div id="main-way" class="stoplight"></div>
-      <div id="cross-way" class="stoplight"></div>
-      <div id="walk-signal">
+      <div id="main-way" class="stoplight">
+        <div class="light red"></div>
+        <div class="light yellow"></div>
+        <div class="light green"></div>
+      </div>
+      <div id="cross-way" class="stoplight">
+        <div class="light red"></div>
+        <div class="light yellow"></div>
+        <div class="light green"></div>
+      </div>
+      <div id="walk-signal" class="walk-sign">
         <i id="walk-icon" class="fas" style="font-size: 300%;" />
       </div>
       <button id="walk-button">Walk</button>

@@ -5,9 +5,13 @@ const walkSignal = document.getElementById('walk-signal');
 const walkIcon = document.getElementById('walk-icon');
 const button = document.getElementById('walk-button');
 
-const GREEN = 'limegreen';
-const YELLOW = 'gold';
-const RED = 'tomato';
+const GREEN = 'green';
+const YELLOW = 'yellow';
+const RED = 'red';
+
+const WALK = 'lime';
+const WALK_WARN = 'gold';
+const DONT_WALK = 'red';
 
 const GREEN_TIME = 3000;
 const YELLOW_TIME = 2000;
@@ -40,7 +44,7 @@ class Intersection {
 
     this.mainWay = new Stoplight('mainWay', emitter, mainWay);
     this.crossWay = new Stoplight('crossWay', emitter, crossWay);
-    this.walkSignal = new WalkSignal(this.emitter, walkIcon);
+    this.walkSignal = new WalkSignal(emitter, walkIcon);
 
     this.walkRequested = false;
     this.requestWalk = this.requestWalk.bind(this);
@@ -75,7 +79,13 @@ class Stoplight {
   }
 
   setColor(color) {
-    this.display.style.backgroundColor = color;
+    for (const child of this.display.children) {
+      if (child.classList.contains(color)) {
+        child.classList.add('on');
+      } else {
+        child.classList.remove('on');
+      }
+    }
   }
 
   async startCycle() {
@@ -98,15 +108,15 @@ class WalkSignal {
 
   setColor(color) {
     this.display.style.color = color;
-    this.display.classList.add(color === GREEN ? 'fa-walking' : 'fa-hand-paper');
+    this.display.classList.add(color === WALK ? 'fa-walking' : 'fa-hand-paper');
   }
 
   async startCycle(id) {
-    this.setColor(GREEN);
+    this.setColor(WALK);
     await wait(WALK_TIME);
-    this.setColor(YELLOW);
+    this.setColor(WALK_WARN);
     await wait(WALK_WARN_TIME);
-    this.setColor(RED);
+    this.setColor(DONT_WALK);
     await wait(BUFFER_TIME);
     this.emitter.emit('done', id);
 
