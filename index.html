@@ -4,14 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .stoplight {
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+      }
+    </style>
   </head>
   <body>
     <div id="root">
-      <div id="main-way" style="width: 100px; height: 100px;"></div>
-      <div id="cross-way" style="width: 100px; height: 100px;"></div>
-      <div id="walk-signal" style="width: 50px; height: 50px;"></div>
+      <div id="main-way" class="stoplight"></div>
+      <div id="cross-way" class="stoplight"></div>
+      <div id="walk-signal">
+        <i id="walk-icon" class="fas" style="font-size: 300%;" />
+      </div>
       <button id="walk-button">Walk</button>
     </div>
     <script src="./index.js"></script>
+    <script src="https://kit.fontawesome.com/36a13a3871.js" crossorigin="anonymous"></script>
   </body>
 </html>
