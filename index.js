@@ -36,15 +36,16 @@ class EventEmitter {
 
 class Intersection {
   constructor() {
-    this.emitter = new EventEmitter();
-    this.mainWay = new Stoplight('mainWay', this.emitter, mainWay);
-    this.crossWay = new Stoplight('crossWay', this.emitter, crossWay);
+    const emitter = new EventEmitter();
+
+    this.mainWay = new Stoplight('mainWay', emitter, mainWay);
+    this.crossWay = new Stoplight('crossWay', emitter, crossWay);
     this.walkSignal = new WalkSignal(this.emitter, walkIcon);
 
     this.walkRequested = false;
     this.requestWalk = this.requestWalk.bind(this);
 
-    this.emitter.on('done', stoplightId => {
+    emitter.on('done', stoplightId => {
       if (this.walkRequested) {
         this.walkRequested = false;
         // Pass id of done stoplight through to walkSignal
@@ -70,7 +71,6 @@ class Stoplight {
     this.id = id;
     this.emitter = emitter;
     this.display = display;
-    this.timeout = null;
     this.setColor(RED);
   }
 
@@ -91,10 +91,9 @@ class Stoplight {
 
 class WalkSignal {
   constructor(emitter, display) {
+    this.emitter = emitter;
     this.display = display;
     this.setColor(RED);
-    this.timeout = null;
-    this.emitter = emitter;
   }
 
   setColor(color) {
