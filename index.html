@@ -5,11 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      .container {
+        margin: auto;
+        text-align: center;
+      }
+
       .stoplight {
         width: 100px;
-        display: inline-block;
         background-color: black;
+        display: inline-block;
         border-radius: 8px;
+        perspective: 400px;
+        transform: perspective(800px) rotateY(-45deg) translate3d(0, 0, -26px);
+        transform-style: preserve-3d;
+      }
+
+      .reverse {
+        transform: perspective(800px) rotateY(45deg) translate3d(0, 0, -26px);
+        background-color: #222;
       }
 
       .walk-sign {
@@ -17,9 +30,9 @@
         height: 60px;
         border-radius: 8px;
         padding-top: 10px;
+        position: relative;
         background-color: black;
-        text-align: center;
-        margin: 1em;
+        margin: 1em auto;
       }
 
       .light {
@@ -73,13 +86,13 @@
     </style>
   </head>
   <body>
-    <div id="root">
+    <div id="root" class="container">
       <div id="main-way" class="stoplight">
         <div class="light red"></div>
         <div class="light yellow"></div>
         <div class="light green"></div>
       </div>
-      <div id="cross-way" class="stoplight">
+      <div id="cross-way" class="reverse stoplight">
         <div class="light red"></div>
         <div class="light yellow"></div>
         <div class="light green"></div>

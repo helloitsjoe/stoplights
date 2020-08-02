@@ -17,7 +17,7 @@ const GREEN_TIME = 3000;
 const YELLOW_TIME = 2000;
 const BUFFER_TIME = 1000;
 const WALK_TIME = 3000;
-const WALK_WARN_TIME = 1000;
+const WALK_WARN_TIME = 2000;
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
